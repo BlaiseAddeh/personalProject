@@ -1,0 +1,121 @@
+**TBL_ADMIN
+ public partial class TBL_ADMIN
+ {
+      public TBL_ADMIN()
+        {
+            this.TBL_Category = new HashSet<TBL_Category>();
+        }
+    
+        public int AD_ID { get; set; }
+        public string AD_NAME { get; set; }
+        public string AD_PASSWORD { get; set; }
+
+        public virtual ICollection<TBL_Category> TBL_Category { get; set; }
+}
+
+**TBL_Category
+
+ public partial class TBL_Category
+ {
+    
+       public TBL_Category()
+        {
+            this.TBL_QUESTIONS = new HashSet<TBL_QUESTIONS>();
+        }
+    
+        public int Cat_Id { get; set; }
+
+        [Display(Name="Subject")]
+        [Required(ErrorMessage ="*")]
+        public string Cat_Name { get; set; }
+        public Nullable<int> Cat_fk_adid { get; set; }
+    
+        public virtual TBL_ADMIN TBL_ADMIN { get; set; }
+        public virtual ICollection<TBL_QUESTIONS> TBL_QUESTIONS { get; set; }
+    
+ }
+
+ **TBL_QUESTIONS
+
+ public partial class TBL_QUESTIONS
+ {
+        public int QUESTION_ID { get; set; }
+
+        [Display(Name="Question")]
+        [Required(ErrorMessage ="*")]
+        public string Q_TEXT { get; set; }
+
+        [Display(Name = "Option-1")]
+        [Required(ErrorMessage = "*")]
+        public string OPA { get; set; }
+
+        [Display(Name = "Option-2")]
+        [Required(ErrorMessage = "*")]
+        public string OPB { get; set; }
+
+        [Display(Name = "Option-3")]
+        [Required(ErrorMessage = "*")]
+        public string OPC { get; set; }
+
+        [Display(Name = "Option-4")]
+        [Required(ErrorMessage = "*")]
+        public string OPD { get; set; }
+
+        [Display(Name = "Correct Answer")]
+        [Required(ErrorMessage = "*")]
+        public string COP { get; set; }
+
+        [Display(Name = "Select Category")]
+        [Required(ErrorMessage = "*")]
+        public Nullable<int> Cat_fk_catid { get; set; }
+    
+        public virtual TBL_Category TBL_Category { get; set; }
+ }
+
+
+ **TBL_SETEXAM
+
+  public partial class TBL_SETEXAM
+  {
+        public int EXAM_ID { get; set; }
+        public Nullable<System.DateTime> EXAM_DATE { get; set; }
+        public Nullable<int> EXAM_FK_STU { get; set; }
+        public string EXAM_NAME { get; set; }
+        public Nullable<int> EXAM_STD_SCORE { get; set; }
+    
+        public virtual TBL_STUDENT TBL_STUDENT { get; set; }
+  }
+
+** TBL_STUDENT
+
+public partial class TBL_STUDENT
+{
+    public TBL_STUDENT()
+    {
+        this.TBL_SETEXAM = new HashSet<TBL_SETEXAM>();
+    }
+
+      public int S_ID { get; set; }
+      public string S_NAME { get; set; }
+      public string S_PASSWORD { get; set; }
+      public string S_IMAGE { get; set; }
+
+       public virtual ICollection<TBL_SETEXAM> TBL_SETEXAM { get; set; }    
+}
+
+
+**DBQuizEntities.cs
+
+ public partial class DBQuizEntities : DbContext
+ {
+        public DBQuizEntities()
+            : base("name=DBQuizEntities")
+        {
+        }
+
+        public virtual DbSet<TBL_ADMIN> TBL_ADMIN { get; set; }
+        public virtual DbSet<TBL_QUESTIONS> TBL_QUESTIONS { get; set; }
+        public virtual DbSet<TBL_SETEXAM> TBL_SETEXAM { get; set; }
+        public virtual DbSet<TBL_STUDENT> TBL_STUDENT { get; set; }
+        public virtual DbSet<TBL_Category> TBL_Category { get; set; }
+ }

@@ -1,0 +1,11 @@
+﻿A EXECUTER UNE SEULE FOIS
+*************************
+Enable-Migrations -ContextTypeName NhlContext -MigrationsDirectory Migrations\NHL
+
+A EXECUTER CHAQUE FOIS QUE VOTRE MODEL CHANGE
+*********************************************
+add-migration -ConfigurationTypeName NHLLeague.Migrations.NHL.Configuration "InitialCreate"
+
+PEUT ETRE EXECUTE CHAQUE FOIS
+*****************************
+update-database -configurationTypeName NHLLeague.Migrations.NHL.Configuration

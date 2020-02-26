@@ -1,0 +1,100 @@
+﻿@model QUIZ_SYSTEM.Models.TBL_STUDENT
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>sregister</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <style>
+		body {
+			background-image: url('../../Content/images/quiz3.png');
+			/* Background image is centered vertically and horizontally at all times */
+			background-position: center center;
+			/* Background image doesn't tile */
+			background-repeat: no-repeat;
+			/* Background image is fixed in the viewport so that it doesn't move when
+        the content's height is greater than the image's height */
+			background-attachment: fixed;
+			/* This is what makes the background image rescale based
+        on the container's size */
+			background-size: cover;
+			/* Set a background color that will be displayed
+        while the background image is loading */
+			background-color: #464646;
+		}
+    </style>
+</head>
+<body>
+
+    @if (ViewBag.msg != null)
+    {
+        <div class="alert alert-danger">
+           <strong>Error!</strong> @ViewBag.msg.
+        </div>
+    }
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <div class="container">
+                    <h2>Student Registration</h2>
+                    @using (Html.BeginForm("sregister","Home",FormMethod.Post, new { enctype="multipart/form-data"}))
+					{
+                        <div class="form-group">
+                            <label for="email" class="col-lg-3 col-md-3 col-sm-3">Email :</label>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="col-lg-7 col-md-7 col-sm-7" style="padding-left:0">
+                                    @Html.TextBoxFor(x => x.S_NAME, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd" class="col-lg-3 col-md-3 col-sm-3">Password:</label>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="col-lg-7 col-md-7 col-sm-7" style="padding-left:0">
+                                    @Html.PasswordFor(x => x.S_PASSWORD, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pwd" class="col-lg-3 col-md-3 col-sm-3">Photo:</label>
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="col-lg-7 col-md-7 col-sm-7" style="padding-left:0">
+                                    <input type="file" class="form-control" id="imgfile" name="imgfile" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12" style="padding-top:25px">
+                                <input type="submit" value="Register Now!" class="btn btn-warning" />
+                            </div>
+
+                        </div>
+
+                    }
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4">
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</body>
+</html>
